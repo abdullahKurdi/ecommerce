@@ -33,18 +33,18 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
-                            <label for="category_id">Category</label>
-                            <select name="category_id" class="form-control">
+                            <label for="product_category_id">Category</label>
+                            <select name="product_category_id" class="form-control">
                                 <option value="">---</option>
                                 @forelse($categories as $category)
-                                    <option value="{{$category->id}}" {{old('category_id') == $category->id ? 'selected' : null}}>{{$category->name}}</option>
+                                    <option value="{{$category->id}}" {{old('product_category_id') == $category->id ? 'selected' : null}}>{{$category->name}}</option>
                                 @empty
                                 @endforelse
                             </select>
                             @error('parent_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-12 col-md-4">
-                            <label for="parent_id">Status</label>
+                            <label for="status">Status</label>
                             <select name="status" class="form-control">
                                 <option value="">---</option>
                                 <option value="1" {{old('status') == '1' ? 'selected' : null}}>Active</option>
@@ -58,7 +58,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea name="description" rows="3" class="form-control summernote"> {{old('name')}} </textarea>
+                                <textarea name="description" rows="3" class="form-control summernote"> {!! old('description') !!} </textarea>
                                 @error('description')<span class="text-danger">{{$message}}</span>@enderror
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="tags">Tags</label>
-                                <select name="tags" class="form-control select2" multiple="multiple">
+                                <select name="tags[]" class="form-control select2" multiple="multiple">
                                     @forelse($tags as $tag)
                                         <option value="{{$tag->id}}">{{$tag->name}}</option>
                                     @empty

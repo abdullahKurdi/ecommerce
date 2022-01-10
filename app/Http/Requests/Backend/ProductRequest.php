@@ -26,19 +26,31 @@ class ProductRequest extends FormRequest
         switch ($this->method()){
             case 'POST':{
                 return [
-                    'name'      =>'required|max:55|unique:product_categories',
-                    'status'    =>'required',
-                    'parent_id' =>'nullable',
-                    'cover'     =>'required|mimes:jpg,png,jpeg|max:2048'
+                    'name'                      =>'required|max:55',
+                    'description'               =>'required',
+                    'price'                     =>'required|numeric',
+                    'quantity'                  =>'required|numeric',
+                    'product_category_id'       =>'required',
+                    'tags.*'                    =>'required',
+                    'featured'                  =>'required',
+                    'status'                    =>'required',
+                    'images'                    =>'required',
+                    'images.*'                  =>'required|mimes:jpg,png,jpeg,gif|max:3048'
                 ];
             }
             case 'PUT':
             case 'PATCH':{
                 return [
-                    'name'      =>'required|max:55|unique:product_categories,name,'.$this->route()->product_category->id,
-                    'status'    =>'required',
-                    'parent_id' =>'nullable',
-                    'cover'     =>'nullable|mimes:jpg,png,jpeg|max:2048'
+                    'name'                      =>'required|max:55',
+                    'description'               =>'required',
+                    'price'                     =>'required|numeric',
+                    'quantity'                  =>'required|numeric',
+                    'product_category_id'       =>'required',
+                    'tags.*'                    =>'required',
+                    'featured'                  =>'required',
+                    'status'                    =>'required',
+                    'images'                    =>'nullable',
+                    'images.*'                  =>'required|mimes:jpg,png,jpeg,gif|max:3048'
                 ];
             }
             default:break;

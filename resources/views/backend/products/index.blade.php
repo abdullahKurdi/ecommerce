@@ -35,7 +35,13 @@
                 <tbody>
                 @forelse($products as $product)
                     <tr>
-                        <td><img src="{{asset('assets/products/'. $product->firstMedia->file_name)}}" width="60px" height="60px" alt="{{$product->name}}"></td>
+                        <td>
+                            @if($product->firstMedia)
+                            <img src="{{asset('assets/products/'. $product->firstMedia->file_name)}}" width="60px" height="60px" alt="{{$product->name}}">
+                            @else
+                                <img src="{{asset('assets/products/not.jpg')}}" width="60px" height="60px" alt="not found">
+                            @endif
+                        </td>
                         <td>{{$product->name}}</td>
                         <td>{{$product->feature()}}</td>
                         <td>{{$product->quantity}}</td>
