@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -28,7 +30,7 @@ class ProductController extends Controller
         //4-order_by
         //5-limit_by
 
-        $products = Product::with('category')
+        $products = Product::with('category' , 'tags' , 'firstMedia')
             ->when(\request()->keyword !=null, function ($q){
                 $q->search(\request()->keyword);
             })
@@ -48,7 +50,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('backend.products.create');
+        $categories = ProductCategory::whereStatus(1)->get(['id','name']);
+        $tags       = Tag::whereStatus(1)->get(['id','name']);
+        return view('backend.products.create',compact('categories','tags'));
     }
 
     /**
