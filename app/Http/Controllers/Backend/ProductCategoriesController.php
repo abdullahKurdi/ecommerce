@@ -69,7 +69,7 @@ class ProductCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductCategoryRequest $request)
     {
 
         //for role and permission

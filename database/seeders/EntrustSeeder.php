@@ -110,6 +110,8 @@ class EntrustSeeder extends Seeder
             $randomCustomer->attachRole($customerRole);
         }
 
+
+
         //Create seeder permission for main section in dashboard
         $manageMain = Permission::create([
             'name'              =>  'main',
@@ -223,7 +225,100 @@ class EntrustSeeder extends Seeder
 
         ]);
 
+        //Create seeder permission for store tags section in dashboard
+        $manageTags = Permission::create([
+            'name'              =>  'manage_tags',
+            'display_name'      =>  'Tags',
+            'description'       =>  'Tags',
+            'route'             =>  'tags',
+            'module'            =>  'tags',
+            'as'                =>  'tags.index',
+            'icon'              =>  'fas fa-tags',
+            'parent'            =>  '0',
+            'parent_original'   =>  '0',
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '1',
+            'ordering'          =>  '10',
+        ]);
+        $manageTags -> parent_show = $manageTags->id;
+        $manageTags->save();
 
+        //Create seeder permission for Tags children section in dashboard
+        $showTags = Permission::create([
+            'name'              =>  'show_tags',
+            'display_name'      =>  'Tags',
+            'description'       =>  'Tags',
+            'route'             =>  'tags',
+            'module'            =>  'tags',
+            'as'                =>  'tags.index',
+            'icon'              =>  'fas fa-file-archive',
+            'parent'            =>  $manageTags->id,
+            'parent_show'       =>  $manageTags->id,
+            'parent_original'   =>  $manageTags->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '1',
+
+        ]);
+        $createTags = Permission::create([
+            'name'              =>  'create_tags',
+            'display_name'      =>  'Create Tags',
+            'description'       =>  'Create Tags',
+            'route'             =>  'tags',
+            'module'            =>  'tags',
+            'as'                =>  'tags.create',
+            'icon'              =>  null,
+            'parent'            =>  $manageTags->id,
+            'parent_show'       =>  $manageTags->id,
+            'parent_original'   =>  $manageTags->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '0',
+
+        ]);
+        $displayTags = Permission::create([
+            'name'              =>  'display_tags',
+            'display_name'      =>  'Display Tags',
+            'description'       =>  'Display Tags',
+            'route'             =>  'tags',
+            'module'            =>  'tags',
+            'as'                =>  'tags.show',
+            'icon'              =>  null,
+            'parent'            =>  $manageTags->id,
+            'parent_show'       =>  $manageTags->id,
+            'parent_original'   =>  $manageTags->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '0',
+
+        ]);
+        $updateTags = Permission::create([
+            'name'              =>  'update_tags',
+            'display_name'      =>  'Update Tags',
+            'description'       =>  'Update Tags',
+            'route'             =>  'tags',
+            'module'            =>  'tags',
+            'as'                =>  'tags.edit',
+            'icon'              =>  null,
+            'parent'            =>  $manageTags->id,
+            'parent_show'       =>  $manageTags->id,
+            'parent_original'   =>  $manageTags->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '0',
+
+        ]);
+        $deleteTags = Permission::create([
+            'name'              =>  'delete_tags',
+            'display_name'      =>  'Delete Tags',
+            'description'       =>  'Delete Tags',
+            'route'             =>  'tags',
+            'module'            =>  'tags',
+            'as'                =>  'tags.destroy',
+            'icon'              =>  null,
+            'parent'            =>  $manageTags->id,
+            'parent_show'       =>  $manageTags->id,
+            'parent_original'   =>  $manageTags->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '0',
+
+        ]);
 
         //Create seeder permission for store product section in dashboard
         $manageProducts = Permission::create([
@@ -321,101 +416,198 @@ class EntrustSeeder extends Seeder
         ]);
 
 
-
-        //Create seeder permission for store tags section in dashboard
-        $manageTags = Permission::create([
-            'name'              =>  'manage_tags',
-            'display_name'      =>  'Tags',
-            'description'       =>  'Tags',
-            'route'             =>  'tags',
-            'module'            =>  'tags',
-            'as'                =>  'tags.index',
-            'icon'              =>  'fas fa-tags',
+        //Create seeder permission for Coupon  section in dashboard
+        $manageProductCoupons = Permission::create([
+            'name'              =>  'manage_product_coupons',
+            'display_name'      =>  'Coupons',
+            'description'       =>  'Coupons',
+            'route'             =>  'product_coupons',
+            'module'            =>  'product_coupons',
+            'as'                =>  'product_coupons.index',
+            'icon'              =>  'fas fa-percentage',
             'parent'            =>  '0',
             'parent_original'   =>  '0',
             'sidebar_link'      =>  '1',
             'appear'            =>  '1',
             'ordering'          =>  '10',
         ]);
-        $manageTags -> parent_show = $manageTags->id;
-        $manageTags->save();
+        $manageProductCoupons -> parent_show = $manageProductCoupons->id;
+        $manageProductCoupons->save();
 
-        //Create seeder permission for Tags children section in dashboard
-        $showTags = Permission::create([
-            'name'              =>  'show_tags',
-            'display_name'      =>  'Tags',
-            'description'       =>  'Tags',
-            'route'             =>  'tags',
-            'module'            =>  'tags',
-            'as'                =>  'tags.index',
+        //Create seeder permission for Coupon children section in dashboard
+        $showProductCoupons = Permission::create([
+            'name'              =>  'show_product_coupons',
+            'display_name'      =>  'Coupons',
+            'description'       =>  'Coupons',
+            'route'             =>  'product_coupons',
+            'module'            =>  'product_coupons',
+            'as'                =>  'product_coupons.index',
             'icon'              =>  'fas fa-file-archive',
-            'parent'            =>  $manageTags->id,
-            'parent_show'       =>  $manageTags->id,
-            'parent_original'   =>  $manageTags->id,
+            'parent'            =>  $manageProductCoupons->id,
+            'parent_show'       =>  $manageProductCoupons->id,
+            'parent_original'   =>  $manageProductCoupons->id,
             'sidebar_link'      =>  '1',
             'appear'            =>  '1',
 
         ]);
-        $createTags = Permission::create([
-            'name'              =>  'create_tags',
-            'display_name'      =>  'Create Tags',
-            'description'       =>  'Create Tags',
-            'route'             =>  'tags',
-            'module'            =>  'tags',
-            'as'                =>  'tags.create',
+        $createProductCoupons = Permission::create([
+            'name'              =>  'create_product_coupons',
+            'display_name'      =>  'Create Coupons',
+            'description'       =>  'Create Coupons',
+            'route'             =>  'product_coupons',
+            'module'            =>  'product_coupons',
+            'as'                =>  'product_coupons.create',
             'icon'              =>  null,
-            'parent'            =>  $manageTags->id,
-            'parent_show'       =>  $manageTags->id,
-            'parent_original'   =>  $manageTags->id,
+            'parent'            =>  $manageProductCoupons->id,
+            'parent_show'       =>  $manageProductCoupons->id,
+            'parent_original'   =>  $manageProductCoupons->id,
             'sidebar_link'      =>  '1',
             'appear'            =>  '0',
 
         ]);
-        $displayTags = Permission::create([
-            'name'              =>  'display_tags',
-            'display_name'      =>  'Display Tags',
-            'description'       =>  'Display Tags',
-            'route'             =>  'tags',
-            'module'            =>  'tags',
-            'as'                =>  'tags.show',
+        $displayProductCoupons = Permission::create([
+            'name'              =>  'display_product_coupons',
+            'display_name'      =>  'Display Coupons',
+            'description'       =>  'Display Coupons',
+            'route'             =>  'product_coupons',
+            'module'            =>  'product_coupons',
+            'as'                =>  'product_coupons.show',
             'icon'              =>  null,
-            'parent'            =>  $manageTags->id,
-            'parent_show'       =>  $manageTags->id,
-            'parent_original'   =>  $manageTags->id,
+            'parent'            =>  $manageProductCoupons->id,
+            'parent_show'       =>  $manageProductCoupons->id,
+            'parent_original'   =>  $manageProductCoupons->id,
             'sidebar_link'      =>  '1',
             'appear'            =>  '0',
 
         ]);
-        $updateTags = Permission::create([
-            'name'              =>  'update_tags',
-            'display_name'      =>  'Update Tags',
-            'description'       =>  'Update Tags',
-            'route'             =>  'tags',
-            'module'            =>  'tags',
-            'as'                =>  'tags.edit',
+        $updateProductCoupons = Permission::create([
+            'name'              =>  'update_product_coupons',
+            'display_name'      =>  'Update Coupons',
+            'description'       =>  'Update Coupons',
+            'route'             =>  'product_coupons',
+            'module'            =>  'product_coupons',
+            'as'                =>  'product_coupons.edit',
             'icon'              =>  null,
-            'parent'            =>  $manageTags->id,
-            'parent_show'       =>  $manageTags->id,
-            'parent_original'   =>  $manageTags->id,
+            'parent'            =>  $manageProductCoupons->id,
+            'parent_show'       =>  $manageProductCoupons->id,
+            'parent_original'   =>  $manageProductCoupons->id,
             'sidebar_link'      =>  '1',
             'appear'            =>  '0',
 
         ]);
-        $deleteTags = Permission::create([
-            'name'              =>  'delete_tags',
-            'display_name'      =>  'Delete Tags',
-            'description'       =>  'Delete Tags',
-            'route'             =>  'tags',
-            'module'            =>  'tags',
-            'as'                =>  'tags.destroy',
+        $deleteProductCoupons = Permission::create([
+            'name'              =>  'delete_product_coupons',
+            'display_name'      =>  'Delete Coupons',
+            'description'       =>  'Delete Coupons',
+            'route'             =>  'product_coupons',
+            'module'            =>  'product_coupons',
+            'as'                =>  'product_coupons.destroy',
             'icon'              =>  null,
-            'parent'            =>  $manageTags->id,
-            'parent_show'       =>  $manageTags->id,
-            'parent_original'   =>  $manageTags->id,
+            'parent'            =>  $manageProductCoupons->id,
+            'parent_show'       =>  $manageProductCoupons->id,
+            'parent_original'   =>  $manageProductCoupons->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '0',
+
+        ]);
+
+
+
+        //Create seeder permission for Review  section in dashboard
+        $manageProductReviews = Permission::create([
+            'name'              =>  'manage_product_reviews',
+            'display_name'      =>  'Reviews',
+            'description'       =>  'Reviews',
+            'route'             =>  'product_reviews',
+            'module'            =>  'product_reviews',
+            'as'                =>  'product_reviews.index',
+            'icon'              =>  'fas fa-comment',
+            'parent'            =>  '0',
+            'parent_original'   =>  '0',
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '1',
+            'ordering'          =>  '10',
+        ]);
+        $manageProductReviews -> parent_show = $manageProductReviews->id;
+        $manageProductReviews->save();
+
+        //Create seeder permission for Review children section in dashboard
+        $showProductReviews = Permission::create([
+            'name'              =>  'show_product_reviews',
+            'display_name'      =>  'Reviews',
+            'description'       =>  'Reviews',
+            'route'             =>  'product_reviews',
+            'module'            =>  'product_reviews',
+            'as'                =>  'product_reviews.index',
+            'icon'              =>  'fas fa-file-archive',
+            'parent'            =>  $manageProductReviews->id,
+            'parent_show'       =>  $manageProductReviews->id,
+            'parent_original'   =>  $manageProductReviews->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '1',
+
+        ]);
+        $createProductReviews = Permission::create([
+            'name'              =>  'create_product_reviews',
+            'display_name'      =>  'Create Reviews',
+            'description'       =>  'Create Reviews',
+            'route'             =>  'product_reviews',
+            'module'            =>  'product_reviews',
+            'as'                =>  'product_reviews.create',
+            'icon'              =>  null,
+            'parent'            =>  $manageProductReviews->id,
+            'parent_show'       =>  $manageProductReviews->id,
+            'parent_original'   =>  $manageProductReviews->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '0',
+
+        ]);
+        $displayProductReviews = Permission::create([
+            'name'              =>  'display_product_reviews',
+            'display_name'      =>  'Display Reviews',
+            'description'       =>  'Display Reviews',
+            'route'             =>  'product_reviews',
+            'module'            =>  'product_reviews',
+            'as'                =>  'product_reviews.show',
+            'icon'              =>  null,
+            'parent'            =>  $manageProductReviews->id,
+            'parent_show'       =>  $manageProductReviews->id,
+            'parent_original'   =>  $manageProductReviews->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '0',
+
+        ]);
+        $updateProductReviews = Permission::create([
+            'name'              =>  'update_product_reviews',
+            'display_name'      =>  'Update Reviews',
+            'description'       =>  'Update Reviews',
+            'route'             =>  'product_reviews',
+            'module'            =>  'product_reviews',
+            'as'                =>  'product_reviews.edit',
+            'icon'              =>  null,
+            'parent'            =>  $manageProductReviews->id,
+            'parent_show'       =>  $manageProductReviews->id,
+            'parent_original'   =>  $manageProductReviews->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '0',
+
+        ]);
+        $deleteProductReviews = Permission::create([
+            'name'              =>  'delete_product_reviews',
+            'display_name'      =>  'Delete Reviews',
+            'description'       =>  'Delete Reviews',
+            'route'             =>  'product_reviews',
+            'module'            =>  'product_reviews',
+            'as'                =>  'product_reviews.destroy',
+            'icon'              =>  null,
+            'parent'            =>  $manageProductReviews->id,
+            'parent_show'       =>  $manageProductReviews->id,
+            'parent_original'   =>  $manageProductReviews->id,
             'sidebar_link'      =>  '1',
             'appear'            =>  '0',
 
         ]);
 
     }
+
 }

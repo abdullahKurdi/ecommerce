@@ -41,7 +41,7 @@
                                 @empty
                                 @endforelse
                             </select>
-                            @error('parent_id')<span class="text-danger">{{$message}}</span>@enderror
+                            @error('product_category_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-12 col-md-4">
                             <label for="status">Status</label>
