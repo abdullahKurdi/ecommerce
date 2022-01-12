@@ -3,7 +3,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex">
             <h5 class="m-0 font-weight-bold text-primary">
-                Edit {{$productCategory->name}} Category
+                Create Category
             </h5>
             <div class="ml-auto">
                 <a href="{{route('admin.product_categories.index')}}" class="btn btn-primary">
@@ -15,14 +15,13 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="{{route('admin.product_categories.update' ,$productCategory->id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('admin.product_categories.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
-                @method('PATCH')
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" name="name" value="{{old('name', $productCategory->name)}}" class="form-control">
+                            <input type="text" name="name" value="{{old('name')}}" class="form-control">
                             @error('name')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                     </div>
@@ -31,7 +30,7 @@
                         <select name="parent_id" class="form-control">
                             <option value="">---</option>
                             @forelse($main_categories as $parent)
-                                <option value="{{$parent->id}}" {{old('parent_id', $productCategory->parent_id) == $parent->id ? 'selected' : null}}>{{$parent->name}}</option>
+                                <option value="{{$parent->id}}" {{old('parent_id') == $parent->id ? 'selected' : null}}>{{$parent->name}}</option>
                             @empty
                             @endforelse
                         </select>
@@ -41,8 +40,8 @@
                         <label for="parent_id">Status</label>
                         <select name="status" class="form-control">
                             <option value="">---</option>
-                            <option value="1" {{old('status' , $productCategory->status) == 1 ? 'selected' : null}}>Active</option>
-                            <option value="0" {{old('status' , $productCategory->status) == 0 ? 'selected' : null}}>Inactive</option>
+                            <option value="1" {{old('status') == '1' ? 'selected' : null}}>Active</option>
+                            <option value="0" {{old('status') == '0' ? 'selected' : null}}>Inactive</option>
                         </select>
                         @error('status')<span class="text-danger">{{$message}}</span>@enderror
                     </div>
@@ -59,7 +58,7 @@
                     </div>
                 </div>
                 <div class="form-group pt-4">
-                    <button type="submit" name="submit" class="btn btn-primary">Update Category</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Add Category</button>
                 </div>
             </form>
         </div>
@@ -76,20 +75,7 @@
                 showRemove:false,
                 showUpload:false,
                 overwriteInitial:false,
-                initialPreview:[
-                    "{{asset('assets/product_categories/'.$productCategory->cover)}}",
-                ],
-                initialPreviewAsData: true,
-                initialPreviewFileType: 'image',
-                initialPreviewConfig:[
-                    {
-                        caption: "{{$productCategory->cover}}" ,
-                        size:"1111",
-                        width: "120px",
-                        url:"{{route('admin.product_categories.remove_image' , ['product_category_id' => $productCategory->id, '_token' => csrf_token()])}}",
-                        key:{{$productCategory->id}}
-                    }
-                ]
+                // closeButton:true
             });
         });
     </script>

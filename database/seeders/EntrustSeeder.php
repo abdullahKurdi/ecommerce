@@ -333,7 +333,7 @@ class EntrustSeeder extends Seeder
             'parent_original'   =>  '0',
             'sidebar_link'      =>  '1',
             'appear'            =>  '1',
-            'ordering'          =>  '10',
+            'ordering'          =>  '15',
         ]);
         $manageProducts -> parent_show = $manageProducts->id;
         $manageProducts->save();
@@ -429,7 +429,7 @@ class EntrustSeeder extends Seeder
             'parent_original'   =>  '0',
             'sidebar_link'      =>  '1',
             'appear'            =>  '1',
-            'ordering'          =>  '10',
+            'ordering'          =>  '20',
         ]);
         $manageProductCoupons -> parent_show = $manageProductCoupons->id;
         $manageProductCoupons->save();
@@ -526,7 +526,7 @@ class EntrustSeeder extends Seeder
             'parent_original'   =>  '0',
             'sidebar_link'      =>  '1',
             'appear'            =>  '1',
-            'ordering'          =>  '10',
+            'ordering'          =>  '25',
         ]);
         $manageProductReviews -> parent_show = $manageProductReviews->id;
         $manageProductReviews->save();
@@ -603,6 +603,101 @@ class EntrustSeeder extends Seeder
             'parent'            =>  $manageProductReviews->id,
             'parent_show'       =>  $manageProductReviews->id,
             'parent_original'   =>  $manageProductReviews->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '0',
+
+        ]);
+
+
+        $manageCustomers = Permission::create([
+            'name'              =>  'manage_customers',
+            'display_name'      =>  'Customers',
+            'description'       =>  'Customers',
+            'route'             =>  'customers',
+            'module'            =>  'customers',
+            'as'                =>  'customers.index',
+            'icon'              =>  'fas fa-user',
+            'parent'            =>  '0',
+            'parent_original'   =>  '0',
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '1',
+            'ordering'          =>  '30',
+        ]);
+        $manageCustomers -> parent_show = $manageCustomers->id;
+        $manageCustomers->save();
+
+        //Create seeder permission for Coupon children section in dashboard
+        $showCustomers = Permission::create([
+            'name'              =>  'show_customers',
+            'display_name'      =>  'Customers',
+            'description'       =>  'Customers',
+            'route'             =>  'customers',
+            'module'            =>  'customers',
+            'as'                =>  'customers.index',
+            'icon'              =>  'fas fa-file-archive',
+            'parent'            =>  $manageCustomers->id,
+            'parent_show'       =>  $manageCustomers->id,
+            'parent_original'   =>  $manageCustomers->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '1',
+
+        ]);
+        $createCustomers = Permission::create([
+            'name'              =>  'create_customers',
+            'display_name'      =>  'Create Customers',
+            'description'       =>  'Create Customers',
+            'route'             =>  'customers',
+            'module'            =>  'customers',
+            'as'                =>  'customers.create',
+            'icon'              =>  null,
+            'parent'            =>  $manageCustomers->id,
+            'parent_show'       =>  $manageCustomers->id,
+            'parent_original'   =>  $manageCustomers->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '0',
+
+        ]);
+        $displayCustomers = Permission::create([
+            'name'              =>  'display_customers',
+            'display_name'      =>  'Display Customers',
+            'description'       =>  'Display Customers',
+            'route'             =>  'customers',
+            'module'            =>  'customers',
+            'as'                =>  'customers.show',
+            'icon'              =>  null,
+            'parent'            =>  $manageCustomers->id,
+            'parent_show'       =>  $manageCustomers->id,
+            'parent_original'   =>  $manageCustomers->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '0',
+
+        ]);
+        $updateCustomers = Permission::create([
+            'name'              =>  'update_customers',
+            'display_name'      =>  'Update Customers',
+            'description'       =>  'Update Customers',
+            'route'             =>  'customers',
+            'module'            =>  'customers',
+            'as'                =>  'customers.edit',
+            'icon'              =>  null,
+            'parent'            =>  $manageCustomers->id,
+            'parent_show'       =>  $manageCustomers->id,
+            'parent_original'   =>  $manageCustomers->id,
+            'sidebar_link'      =>  '1',
+            'appear'            =>  '0',
+
+        ]);
+        $deleteCustomers = Permission::create([
+            'name'              =>  'delete_customers',
+            'display_name'      =>  'Delete Customers',
+            'description'       =>  'Delete Customers',
+            'route'             =>  'customers',
+            'module'            =>  'customers',
+            'as'                =>  'customers.destroy',
+            'icon'              =>  null,
+            'parent'            =>  $manageCustomers->id,
+            'parent_show'       =>  $manageCustomers->id,
+            'parent_original'   =>  $manageCustomers->id,
             'sidebar_link'      =>  '1',
             'appear'            =>  '0',
 

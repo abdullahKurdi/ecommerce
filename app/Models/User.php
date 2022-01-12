@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -22,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'first_name',
         'last_name',
         'username',
+        'status' ,
         'mobile',
         'user_image',
         'email',
@@ -53,5 +55,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getFullNameAttribute():string
     {
       return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(ProductReview::class);
+    }
+    public function status():string
+    {
+        return $this->status ? 'Active' : 'Inactive';
     }
 }
