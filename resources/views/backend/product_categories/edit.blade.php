@@ -76,6 +76,7 @@
                 showRemove:false,
                 showUpload:false,
                 overwriteInitial:false,
+                @if($productCategory->cover != null)
                 initialPreview:[
                     "{{asset('assets/product_categories/'.$productCategory->cover)}}",
                 ],
@@ -90,6 +91,7 @@
                         key:{{$productCategory->id}}
                     }
                 ]
+                @endif
             });
         });
     </script>

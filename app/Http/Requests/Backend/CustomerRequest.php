@@ -33,7 +33,7 @@ class CustomerRequest extends FormRequest
                     'mobile'            =>'required|numeric|unique:users',
                     'status'            =>'required',
                     'password'          =>'required|min:8',
-                    'user_image'        =>'required|mimes:jpg,png,jpeg|max:2048'
+                    'user_image'        =>'nullable|mimes:jpg,png,jpeg|max:2048'
                 ];
             }
             case 'PUT':
@@ -45,7 +45,7 @@ class CustomerRequest extends FormRequest
                     'email'             =>'required|email|max:255|unique:users,email,'.$this->route()->customer->id,
                     'mobile'            =>'required|numeric|unique:users,mobile,'.$this->route()->customer->id,
                     'status'            =>'required',
-                    'password'          =>'required|min:8',
+                    'password'          =>'nullable|min:8',
                     'user_image'        =>'required|mimes:jpg,png,jpeg|max:2048'
                 ];
             }

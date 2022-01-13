@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CustomerRequest;
 use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -36,7 +37,7 @@ class CustomerController extends Controller
             ->when(\request()->status !=null, function ($q){
                 $q->whereStatus(\request()->status);
             })
-            ->orderBy(\request()->sort_by ?? 'id', \request()->order_by ?? 'asc')
+            ->orderBy(\request()->sort_by ?? 'id', \request()->order_by ?? 'desc')
             ->paginate(\request()->limit_by ?? 10 );
 
         return view('backend.customers.index', compact('customers'));
@@ -64,7 +65,7 @@ class CustomerController extends Controller
         $input['last_name'] = $request->last_name;
         $input['username'] = $request->username;
         $input['email'] = $request->email;
-        $input['email_verified_at'] = now();
+//        $input['email_verified_at'] = now();
         $input['mobile'] = $request->mobile;
         $input['status'] = $request->status;
         $input['password'] = bcrypt($request->password);
@@ -79,6 +80,7 @@ class CustomerController extends Controller
             $input['user_image'] = $file_name;
         }
         $customer = User::create($input);
+        $customer->markEmailAsVerified();
         $customer->attachRole(Role::whereName('customer')->first()->id);
 
         return redirect()->route('admin.customers.index')->with([
@@ -152,8 +154,11 @@ class CustomerController extends Controller
             return redirect('admin/index');
         }
 
-        if(File::exists('assets/users/'.$customer->user_image)){
-            unlink('assets/users/'.$customer->user_image);
+        if ($customer->user_image != null){
+            if(File::exists('assets/users/'.$customer->user_image)){
+                unlink('assets/users/'.$customer->user_image);
+            }
+
         }
         $customer->delete();
 
@@ -165,16 +170,19 @@ class CustomerController extends Controller
 
     public function remove_image(Request $request)
     {
+//        dd($request->all());
         //for role and permission
         if (!auth()->user()->ability(['admin'],['delete_customers'])){
             return redirect('admin/index');
         }
-        $customer =User::findOrFail($request->customer_id);
+        $customer = User::findOrFail($request->customer_id);
+
         if(File::exists('assets/users/'.$customer->user_image)){
             unlink('assets/users/'.$customer->user_image);
-            $customer->user_image = null;
-            $customer->save();
         }
+        $customer->user_image = null;
+        $customer->save();
+
         return true;
     }
 }

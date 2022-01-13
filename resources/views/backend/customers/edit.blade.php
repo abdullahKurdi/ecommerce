@@ -80,7 +80,7 @@
 
                 <div class="row pt-4">
                     <div class="col-12">
-                        <label for="user_image">Cover</label>
+                        <label for="user_image">Profile Picture</label>
                         <br>
                         <div class="file-loading">
                             <input type="file" name="user_image" id="user_image" class="file-input-overview">
@@ -107,6 +107,7 @@
                 showRemove:false,
                 showUpload:false,
                 overwriteInitial:false,
+                @if($customer->user_image != null)
                 initialPreview:[
                     "{{asset('assets/users/'.$customer->user_image)}}",
                 ],
@@ -121,6 +122,7 @@
                         key:{{$customer->id}}
                     }
                 ]
+                @endif
             });
         });
     </script>

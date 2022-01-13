@@ -55,7 +55,7 @@
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>
-                            <form action="{{route('admin.customers.destroy', $customer->id)}}" method="post" id="delete-customer{{ $customer->id }}" class="d-none">
+                            <form action="{{route('admin.customers.destroy', $customer->id)}}" method="post" id="delete-customer-{{ $customer->id }}" class="d-none">
                                 @csrf
                                 @method('DELETE')
                             </form>

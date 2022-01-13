@@ -97,22 +97,4 @@
         </div>
     </div>
 @endsection
-@section('script')
-    <script>
-        $(function (){
-            $(".summernote").summernote({
-                tabSize: 2,
-                height:200,
-                toolbar:[
-                    ['style',   ['style']],
-                    ['font',    ['bold', 'underline', 'clear']],
-                    ['color',   ['color']],
-                    ['para',    ['ul', 'ol', 'paragraph']],
-                    ['table',   ['table']],
-                    ['insert',  ['link']],
-                    ['view',    ['fullscreen', 'codeview', 'help']]
-                ]
-            });
-        });
-    </script>
-@endsection
+

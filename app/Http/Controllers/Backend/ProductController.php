@@ -40,7 +40,7 @@ class ProductController extends Controller
             ->when(\request()->status !=null, function ($q){
                 $q->whereStatus(\request()->status);
             })
-            ->orderBy(\request()->sort_by ?? 'id', \request()->order_by ?? 'asc')
+            ->orderBy(\request()->sort_by ?? 'id', \request()->order_by ?? 'desc')
             ->paginate(\request()->limit_by ?? 10 );
 
         return view('backend.products.index', compact('products'));
