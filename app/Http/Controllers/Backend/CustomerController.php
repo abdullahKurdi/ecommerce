@@ -185,4 +185,17 @@ class CustomerController extends Controller
 
         return true;
     }
+
+    public function get_customers()
+    {
+        $customers = User::whereHas('roles', function ($query) {
+            $query->where('name', 'customer');
+        })
+            ->when(\request()->input('query') != '', function ($query) {
+                $query->search(\request()->input('query'));
+            })
+            ->get(['id', 'first_name', 'last_name', 'email'])->toArray();
+
+        return response()->json($customers);
+    }
 }

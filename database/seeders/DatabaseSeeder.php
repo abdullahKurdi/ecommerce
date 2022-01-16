@@ -34,6 +34,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call(WorldStatusSeeder::class);
 
+        $this->call(ShippingCompanySeeder::class);
+
+
+
 
     }
 }
