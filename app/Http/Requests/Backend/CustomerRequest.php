@@ -46,7 +46,7 @@ class CustomerRequest extends FormRequest
                     'mobile'            =>'required|numeric|unique:users,mobile,'.$this->route()->customer->id,
                     'status'            =>'required',
                     'password'          =>'nullable|min:8',
-                    'user_image'        =>'required|mimes:jpg,png,jpeg|max:2048'
+                    'user_image'        =>'nullable|mimes:jpg,png,jpeg|max:2048'
                 ];
             }
             default:break;

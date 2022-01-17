@@ -55,7 +55,6 @@ class CustomerController extends Controller
 
     public function store(CustomerRequest $request)
     {
-
         //for role and permission
         if (!auth()->user()->ability(['admin'],['create_customers'])){
             return redirect('admin/index');
