@@ -1,8 +1,13 @@
 @extends('layouts.admin')
 
 @section('style')
-    <link rel="stylesheet" href="{{asset('backend/vendor/datepicker/themes/classic.css')}}">
-    <link rel="stylesheet" href="{{asset('backend/vendor/datepicker/themes/classic.date.css')}}">
+    <link rel="stylesheet" href="{{ asset('backend/vendor/datepicker/themes/classic.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/vendor/datepicker/themes/classic.date.css') }}">
+    <style>
+        .picker__select--month, .picker__select--year {
+            padding: 0 !important;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -108,43 +113,7 @@
     <script src="{{asset('backend/vendor/datepicker/picker.js')}}"></script>
     <script src="{{asset('backend/vendor/datepicker/picker.date.js')}}"></script>
     <script>
-        $(function (){
-            $("#code").keyup(function (){
-                this.value = this.value.toUpperCase();
-            })
-
-            $("#start_date").pickadate({
-                format : 'yyyy-mm-dd',
-                selectMonth : true,
-                selectYear : true,
-                clear : 'Clear',
-                close : 'Ok',
-                closeOnSelect: true
-            });
-            var startdate = $('#start_date').pickadate('picker');
-            var enddate = $('#expire_date').pickadate('picker');
-
-            $("#start_date").change(function (){
-                selected_ci_date = "";
-                selected_ci_date = $('#start_date').val();
-                if(selected_ci_date != null){
-                    var cidate = new Date(selected_ci_date);
-                    min_codate = "";
-                    min_codate = new Date();
-                    min_codate.setDate(cidate.getDate()+5);
-                    enddate.set('min' , min_codate)
-                }
-            });
-            $("#expire_date").pickadate({
-                format : 'yyyy-mm-dd',
-                min : new Date(),
-                selectMonth : true,
-                selectYear : true,
-                clear : 'Clear',
-                close : 'Ok',
-                closeOnSelect: true
-            });
-
+        $(function(){
             $(".summernote").summernote({
                 tabSize: 2,
                 height:200,
@@ -157,7 +126,45 @@
                     ['insert',  ['link']],
                     ['view',    ['fullscreen', 'codeview', 'help']]
                 ]
-            })
+            });
+
+            $('#code').keyup(function () {
+                this.value = this.value.toUpperCase();
+            });
+
+            $('#start_date').pickadate({
+                format: 'yyyy-mm-dd',
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: true, // Creates a dropdown to control month
+                clear: 'Clear',
+                close: 'Ok',
+                closeOnSelect: true // Close upon selecting a date,
+            });
+            var startdate = $('#start_date').pickadate('picker');
+            var enddate = $('#expire_date').pickadate('picker');
+
+            $('#start_date').change(function() {
+                selected_ci_date ="";
+                selected_ci_date = $('#start_date').val();
+                if (selected_ci_date != null)   {
+                    var cidate = new Date(selected_ci_date);
+                    min_codate = "";
+                    min_codate = new Date();
+                    min_codate.setDate(cidate.getDate()+1);
+                    enddate.set('min', min_codate);
+                }
+            });
+
+            $('#expire_date').pickadate({
+                format: 'yyyy-mm-dd',
+                min : new Date(),
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: true, // Creates a dropdown to control month
+                clear: 'Clear',
+                close: 'Ok',
+                closeOnSelect: true // Close upon selecting a date,
+            });
+
         });
     </script>
 @endsection

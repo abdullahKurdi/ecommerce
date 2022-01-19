@@ -52,6 +52,27 @@ class Product extends Model
         return $this->morphMany(Media::class,'mediable');
     }
 
+    public function scopeFeatured($query)
+    {
+        return $query->whereFeatured(true);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus(true);
+    }
+
+    public function scopeHasQuantity($query)
+    {
+        return $query->where('quantity' , '>' ,0);
+    }
+
+    public function scopeActiveCategory($query)
+    {
+        return $query->whereHas('category' , function ($q){
+            $q->whereStatus(1);
+        });
+    }
 
     public function status()
     {

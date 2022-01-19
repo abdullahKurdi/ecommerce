@@ -17,11 +17,11 @@ use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
 // Frontend Routes
-Route::get('/'              ,     [   FrontendController::class , 'index'    ])->name('frontend.index');
-Route::get('/cart'          ,     [   FrontendController::class , 'cart'     ])->name('frontend.cart');
-Route::get('/checkout'      ,     [   FrontendController::class , 'checkout' ])->name('frontend.checkout');
-Route::get('/detail'        ,     [   FrontendController::class , 'detail'   ])->name('frontend.detail');
-Route::get('/shop'          ,     [   FrontendController::class , 'shop'     ])->name('frontend.shop');
+Route::get('/'                  ,     [   FrontendController::class , 'index'    ])->name('frontend.index');
+Route::get('/cart'              ,     [   FrontendController::class , 'cart'     ])->name('frontend.cart');
+Route::get('/checkout'          ,     [   FrontendController::class , 'checkout' ])->name('frontend.checkout');
+Route::get('/product/{slug?}'   ,     [   FrontendController::class , 'product'  ])->name('frontend.product');
+Route::get('/shop'              ,     [   FrontendController::class , 'shop'     ])->name('frontend.shop');
 
 
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xmlns:livewire="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -47,7 +47,8 @@
     <link rel="stylesheet" href="{{asset('frontend/css/style.default.css')}}" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{{asset('frontend/css/custom.css')}}">
-
+    <livewire:styles />
+    @yield('style')
 </head>
 <body>
     <div id="app" class="page-holder {{ request()->routeIs('frontend.detail' ? 'bg-light' : null) }}">
@@ -64,19 +65,24 @@
 
     </div>
 
-    <!--  frontend template Modal in pages  -->
-    @include('partial.frontend.modal')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
     <!--  frontend template static in pages  -->
     <!-- JavaScript files-->
+    <livewire:scripts />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <x-livewire-alert::scripts />
+
+
 
     <script src="{{asset('frontend/vendor/glightbox/js/glightbox.min.js')}}"></script>
     <script src="{{asset('frontend/vendor/nouislider/nouislider.min.js')}}"></script>
     <script src="{{asset('frontend/vendor/swiper/swiper-bundle.min.js')}}"></script>
     <script src="{{asset('frontend/vendor/choices.js/public/assets/scripts/choices.min.js')}}"></script>
+
     <script src="{{asset('frontend/js/front.js')}}"></script>
     <script>
         // ------------------------------------------------------- //
@@ -104,5 +110,7 @@
 
     </script>
 
+
+    @yield('script')
 </body>
 </html>
