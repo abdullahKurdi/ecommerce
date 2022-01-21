@@ -60,12 +60,12 @@
             @yield('content')
         </div>
 
+
         <!--  frontend template footer in pages  -->
         @include('partial.frontend.footer')
 
     </div>
-
-
+    <livewire:frontend.product-modal-shared/>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
