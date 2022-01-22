@@ -13,21 +13,31 @@ class FrontendController extends Controller
     {
         $product_categories = ProductCategory::whereStatus(1)->whereNull('parent_id')->get();
 
-        //dd($product_categories);
-        return view('frontend.index',compact('product_categories'));
+        return view('frontend.index', compact('product_categories'));
+    }
+
+    public function shop($slug = null)
+    {
+        return view('frontend.shop',compact('slug'));
+    }
+
+    public function shop_tag($slug = null)
+    {
+        return view('frontend.shop_tag',compact('slug'));
     }
 
     public function product($slug)
     {
-        $product = Product::with('media','category','tags','reviews')->withAvg('reviews','rating')->whereSlug($slug)->active()->hasQuantity()->ActiveCategory()->firstOrFail();
+        $product = Product::with('media', 'category', 'tags', 'reviews')->withAvg('reviews', 'rating')->whereSlug($slug)->active()->hasQuantity()->ActiveCategory()->firstOrFail();
 
-        $relatedProducts = Product::with('firstMedia')->whereHas('category', function ($query) use($product) {
+        $relatedProducts = Product::with('firstMedia')->whereHas('category', function ($query) use ($product) {
             $query->whereId($product->product_category_id);
             $query->whereStatus(true);
         })->inRandomOrder()->active()->hasQuantity()->take(4)->get();
 
-        return view('frontend.product',compact('product','relatedProducts'));
+        return view('frontend.product', compact('product', 'relatedProducts'));
     }
+
 
     public function cart()
     {
@@ -40,8 +50,4 @@ class FrontendController extends Controller
     }
 
 
-    public function shop()
-    {
-        return view('frontend.shop');
-    }
 }

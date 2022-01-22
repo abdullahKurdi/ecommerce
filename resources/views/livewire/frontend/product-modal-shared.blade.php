@@ -1,4 +1,3 @@
-
 <div wire:ignore.self class="modal fade" id="productView" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content overflow-hidden border-0">
