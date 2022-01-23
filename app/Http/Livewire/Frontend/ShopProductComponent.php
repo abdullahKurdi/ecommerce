@@ -78,7 +78,8 @@ class ShopProductComponent extends Component
         $products = Product::with('firstMedia');
         if ($this->slug == '') {
             $products = $products->ActiveCategory();
-        } else {
+        } else
+        {
             $product_category = ProductCategory::whereSlug($this->slug)->whereStatus(true)->first();
 
             if (is_null($product_category->parent_id)) {

@@ -22,6 +22,7 @@
           <div class="row">
             <div class="col-lg-8 mb-4 mb-lg-0">
               <!-- CART TABLE-->
+
               <div class="table-responsive mb-4">
                 <table class="table text-nowrap">
                   <thead class="bg-light">
@@ -34,52 +35,55 @@
                     </tr>
                   </thead>
                   <tbody class="border-0">
+
+                  @forelse(Cart::content() as $item)
+
                     <tr>
                       <th class="ps-0 py-3 border-light" scope="row">
-                        <div class="d-flex align-items-center"><a class="reset-anchor d-block animsition-link" href="{{ route('frontend.detail') }}"><img src="{{asset('frontend/img/product-detail-3.jpg')}}" alt="..." width="70"/></a>
-                          <div class="ms-3"><strong class="h6"><a class="reset-anchor animsition-link" href="{{ route('frontend.detail') }}">Red digital smartwatch</a></strong></div>
+                        <div class="d-flex align-items-center">
+                            <a class="reset-anchor d-block animsition-link" href="{{ route('frontend.product',$item->model->slug) }}">
+                                <img src="{{asset('assets/products/'.$item->model->firstMedia->file_name)}}" alt="{{$item->model->name}}" width="70"/>
+                            </a>
+                          <div class="ms-3">
+                              <strong class="h6">
+                                  <a class="reset-anchor animsition-link" href="{{ route('frontend.product',$item->model->slug) }}">
+                                      {{$item->model->name}}
+                                  </a>
+                              </strong>
+                          </div>
                         </div>
                       </th>
                       <td class="p-3 align-middle border-light">
-                        <p class="mb-0 small">$250</p>
+                        <p class="mb-0 small">${{$item->model->price}}</p>
                       </td>
                       <td class="p-3 align-middle border-light">
-                        <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
+                        <div class="border d-flex align-items-center justify-content-between px-3">
+                            <span class="small text-uppercase text-gray headings-font-family">Quantity</span>
                           <div class="quantity">
                             <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                            <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="1"/>
+                            <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="{{$item->qty}}"/>
                             <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
                           </div>
                         </div>
                       </td>
                       <td class="p-3 align-middle border-light">
-                        <p class="mb-0 small">$250</p>
+                        <p class="mb-0 small">${{$item->model->price*$item->qty}}</p>
                       </td>
-                      <td class="p-3 align-middle border-light"><a class="reset-anchor" href="#!"><i class="fas fa-trash-alt small text-muted"></i></a></td>
+                      <td class="p-3 align-middle border-light">
+                          <a class="reset-anchor" href="#!">
+                              <i class="fas fa-trash-alt small text-muted"></i>
+                          </a>
+                      </td>
                     </tr>
-                    <tr>
-                      <th class="ps-0 py-3 border-0" scope="row">
-                        <div class="d-flex align-items-center"><a class="reset-anchor d-block animsition-link" href="{{ route('frontend.detail') }}"><img src="{{asset('frontend/img/product-detail-2.jpg')}}" alt="..." width="70"/></a>
-                          <div class="ms-3"><strong class="h6"><a class="reset-anchor animsition-link" href="{{ route('frontend.detail') }}">Apple watch</a></strong></div>
-                        </div>
-                      </th>
-                      <td class="p-3 align-middle border-0">
-                        <p class="mb-0 small">$250</p>
-                      </td>
-                      <td class="p-3 align-middle border-0">
-                        <div class="border d-flex align-items-center justify-content-between px-3"><span class="small text-uppercase text-gray headings-font-family">Quantity</span>
-                          <div class="quantity">
-                            <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                            <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="1"/>
-                            <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="p-3 align-middle border-0">
-                        <p class="mb-0 small">$250</p>
-                      </td>
-                      <td class="p-3 align-middle border-0"><a class="reset-anchor" href="#!"><i class="fas fa-trash-alt small text-muted"></i></a></td>
-                    </tr>
+
+                  @empty
+                      <tr>
+                          <td class="pl-0 border-light " colspan="5">
+                              <p class="text-center">No Item Found</p>
+                          </td>
+                      </tr>
+                  @endforelse
+
                   </tbody>
                 </table>
               </div>
@@ -97,9 +101,23 @@
                 <div class="card-body">
                   <h5 class="text-uppercase mb-4">Cart total</h5>
                   <ul class="list-unstyled mb-0">
-                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Subtotal</strong><span class="text-muted small">$250</span></li>
+                    <li class="d-flex align-items-center justify-content-between">
+                        <strong class="text-uppercase small font-weight-bold">
+                            Subtotal
+                        </strong>
+                        <span class="text-muted small">
+                            ${{Cart::subtotal()}}
+                        </span>
+                    </li>
                     <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong><span>$250</span></li>
+                    <li class="d-flex align-items-center justify-content-between mb-4">
+                        <strong class="text-uppercase small font-weight-bold">
+                            Total
+                        </strong>
+                        <span>
+                            ${{Cart::total()}}
+                        </span>
+                    </li>
                     <li>
                       <form action="#">
                         <div class="input-group mb-0">
