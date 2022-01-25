@@ -38,48 +38,12 @@
 
                   @forelse(Cart::content() as $item)
 
-                    <tr>
-                      <th class="ps-0 py-3 border-light" scope="row">
-                        <div class="d-flex align-items-center">
-                            <a class="reset-anchor d-block animsition-link" href="{{ route('frontend.product',$item->model->slug) }}">
-                                <img src="{{asset('assets/products/'.$item->model->firstMedia->file_name)}}" alt="{{$item->model->name}}" width="70"/>
-                            </a>
-                          <div class="ms-3">
-                              <strong class="h6">
-                                  <a class="reset-anchor animsition-link" href="{{ route('frontend.product',$item->model->slug) }}">
-                                      {{$item->model->name}}
-                                  </a>
-                              </strong>
-                          </div>
-                        </div>
-                      </th>
-                      <td class="p-3 align-middle border-light">
-                        <p class="mb-0 small">${{$item->model->price}}</p>
-                      </td>
-                      <td class="p-3 align-middle border-light">
-                        <div class="border d-flex align-items-center justify-content-between px-3">
-                            <span class="small text-uppercase text-gray headings-font-family">Quantity</span>
-                          <div class="quantity">
-                            <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                            <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text" value="{{$item->qty}}"/>
-                            <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="p-3 align-middle border-light">
-                        <p class="mb-0 small">${{$item->model->price*$item->qty}}</p>
-                      </td>
-                      <td class="p-3 align-middle border-light">
-                          <a class="reset-anchor" href="#!">
-                              <i class="fas fa-trash-alt small text-muted"></i>
-                          </a>
-                      </td>
-                    </tr>
+                    <livewire:frontend.cart-item-component :item="$item->rowId" :key="$item->rowId"/>
 
                   @empty
                       <tr>
                           <td class="pl-0 border-light " colspan="5">
-                              <p class="text-center">No Item Found</p>
+                              <p class="text-center">No item found on your cart!</p>
                           </td>
                       </tr>
                   @endforelse
@@ -96,40 +60,7 @@
               </div>
             </div>
             <!-- ORDER TOTAL-->
-            <div class="col-lg-4">
-              <div class="card border-0 rounded-0 p-lg-4 bg-light">
-                <div class="card-body">
-                  <h5 class="text-uppercase mb-4">Cart total</h5>
-                  <ul class="list-unstyled mb-0">
-                    <li class="d-flex align-items-center justify-content-between">
-                        <strong class="text-uppercase small font-weight-bold">
-                            Subtotal
-                        </strong>
-                        <span class="text-muted small">
-                            ${{Cart::subtotal()}}
-                        </span>
-                    </li>
-                    <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between mb-4">
-                        <strong class="text-uppercase small font-weight-bold">
-                            Total
-                        </strong>
-                        <span>
-                            ${{Cart::total()}}
-                        </span>
-                    </li>
-                    <li>
-                      <form action="#">
-                        <div class="input-group mb-0">
-                          <input class="form-control" type="text" placeholder="Enter your coupon">
-                          <button class="btn btn-dark btn-sm w-100" type="submit"> <i class="fas fa-gift me-2"></i>Apply coupon</button>
-                        </div>
-                      </form>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <livewire:frontend.car-total-component />
           </div>
         </section>
 @endsection

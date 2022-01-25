@@ -47,6 +47,7 @@
     <link rel="stylesheet" href="{{asset('frontend/css/style.default.css')}}" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{{asset('frontend/css/custom.css')}}">
+
     <livewire:styles />
     @yield('style')
 </head>
@@ -110,7 +111,7 @@
 
     </script>
 
-
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" ></script>
     @yield('script')
 </body>
 </html>

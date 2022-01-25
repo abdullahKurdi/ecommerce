@@ -21,7 +21,9 @@
                             <a class="dropdown-item border-0 transition-link" href="{{route('frontend.shop')}}">Category</a>
                             <a class="dropdown-item border-0 transition-link" href="{{route('frontend.product')}}">Product product</a>
                             <a class="dropdown-item border-0 transition-link" href="{{route('frontend.cart')}}">Shopping cart</a>
-                            <a class="dropdown-item border-0 transition-link" href="{{route('frontend.checkout')}}">Checkout</a></div>
+                            <a class="dropdown-item border-0 transition-link" href="{{route('frontend.checkout')}}">Checkout</a>
+                            <a class="dropdown-item border-0 transition-link" href="{{route('frontend.wishlist')}}">Wishlist</a>
+                        </div>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
