@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\CityController;
 use App\Http\Controllers\Backend\CountryController;
 use App\Http\Controllers\Backend\CustomerAddressController;
 use App\Http\Controllers\Backend\CustomerController;
+use App\Http\Controllers\Backend\PaymentMethodController;
 use App\Http\Controllers\Backend\ProductCategoriesController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductCouponController;
@@ -23,9 +24,10 @@ Route::get('/shop/{slug?}'      ,     [   FrontendController::class , 'shop'    
 Route::get('/shop/tags/{slug}'  ,     [   FrontendController::class , 'shop_tag' ])->name('frontend.shop_tag');
 Route::get('/cart'              ,     [   FrontendController::class , 'cart'     ])->name('frontend.cart');
 Route::get('/wishlist'          ,     [   FrontendController::class , 'wishlist' ])->name('frontend.wishlist');
-Route::get('/checkout'          ,     [   FrontendController::class , 'checkout' ])->name('frontend.checkout');
 
-
+Route::group(['middleware' => ['roles' , 'role:customer']] , function (){
+    Route::get('/checkout'          ,     [   FrontendController::class , 'checkout' ])->name('frontend.checkout');
+});
 
 Auth::routes(['verify'=>true]);
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -75,6 +77,8 @@ Route::group(['prefix' => 'admin' ,'as' => 'admin.'], function() {
         Route::resource('cities', CityController::class);
 
         Route::resource('shipping_companies', ShippingCompanyController::class);
+
+        Route::resource('payment_methods', PaymentMethodController::class);
 
     });
 

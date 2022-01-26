@@ -17,7 +17,7 @@ class CreateShippingCompaniesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
-            $table->string('description')->unique();
+            $table->string('description');
             $table->boolean('fast')->default(false);
             $table->unsignedDecimal('cost')->default('0.00');
             $table->boolean('status')->default(false);
