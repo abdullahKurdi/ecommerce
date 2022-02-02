@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\SupervisorController;
 use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 // Frontend Routes
@@ -26,7 +27,13 @@ Route::get('/cart'              ,     [   FrontendController::class , 'cart'    
 Route::get('/wishlist'          ,     [   FrontendController::class , 'wishlist' ])->name('frontend.wishlist');
 
 Route::group(['middleware' => ['roles' , 'role:customer']] , function (){
-    Route::get('/checkout'          ,     [   FrontendController::class , 'checkout' ])->name('frontend.checkout');
+
+    Route::get('/checkout'                          ,    [FrontendController::class         , 'checkout'        ])->name('frontend.checkout');
+    Route::post('/checkout/payment'                 ,    [PaymentController::class          , 'checkout_now'    ])->name('checkout.payment');
+    Route::get('/checkout/{order_id}/cancelled'     ,    [PaymentController::class          , 'cancelled'       ])->name('checkout.cancel');
+    Route::get('/checkout/{order_id}/completed'     ,    [PaymentController::class          , 'completed'       ])->name('checkout.complete');
+    Route::get('/checkout/webhook/{order?}/{env?}'  ,    [PaymentController::class          , 'webhook'         ])->name('checkout.webhook.ipn');
+
 });
 
 Auth::routes(['verify'=>true]);
@@ -79,6 +86,7 @@ Route::group(['prefix' => 'admin' ,'as' => 'admin.'], function() {
         Route::resource('shipping_companies', ShippingCompanyController::class);
 
         Route::resource('payment_methods', PaymentMethodController::class);
+
 
     });
 

@@ -38,7 +38,7 @@
                         <input
                             type="radio"
                             id="shipping-company-{{ $shipping_company->id }}"
-                            class="custom-control-input"
+                            class="custom-control-input text-dark p-0 shadow-0"
                             wire:model="shipping_company_id"
                             wire:click="updateShippingCost()"
                             {{ intval($shipping_company_id) == $shipping_company->id ? 'checked' : '' }}
@@ -56,112 +56,43 @@
             @endforelse
         </div>
         @endif
-{{--        <form action="#">--}}
-{{--            <div class="row gy-3">--}}
-{{--                <div class="col-lg-6">--}}
-{{--                    <label class="form-label text-sm text-uppercase" for="firstName">First name </label>--}}
-{{--                    <input class="form-control form-control-lg" type="text" id="firstName" placeholder="Enter your first name">--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-6">--}}
-{{--                    <label class="form-label text-sm text-uppercase" for="lastName">Last name </label>--}}
-{{--                    <input class="form-control form-control-lg" type="text" id="lastName" placeholder="Enter your last name">--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-6">--}}
-{{--                    <label class="form-label text-sm text-uppercase" for="email">Email address </label>--}}
-{{--                    <input class="form-control form-control-lg" type="email" id="email" placeholder="e.g. Jason@example.com">--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-6">--}}
-{{--                    <label class="form-label text-sm text-uppercase" for="phone">Phone number </label>--}}
-{{--                    <input class="form-control form-control-lg" type="tel" id="phone" placeholder="e.g. +02 245354745">--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-6">--}}
-{{--                    <label class="form-label text-sm text-uppercase" for="company">Company name (optional) </label>--}}
-{{--                    <input class="form-control form-control-lg" type="text" id="company" placeholder="Your company name">--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-6 form-group">--}}
-{{--                    <label class="form-label text-sm text-uppercase" for="country">Country</label>--}}
-{{--                    <select class="country form-control form-control-lg" id="country" data-customclass="form-control form-control-lg rounded-0">--}}
-{{--                        <option value="">Choose your country</option>--}}
-{{--                    </select>--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-12">--}}
-{{--                    <label class="form-label text-sm text-uppercase" for="address">Address line 1 </label>--}}
-{{--                    <input class="form-control form-control-lg" type="text" id="address" placeholder="House number and street name">--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-12">--}}
-{{--                    <label class="form-label text-sm text-uppercase" for="addressalt">Address line 2 </label>--}}
-{{--                    <input class="form-control form-control-lg" type="text" id="addressalt" placeholder="Apartment, Suite, Unit, etc (optional)">--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-6">--}}
-{{--                    <label class="form-label text-sm text-uppercase" for="city">Town/City </label>--}}
-{{--                    <input class="form-control form-control-lg" type="text" id="city">--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-6">--}}
-{{--                    <label class="form-label text-sm text-uppercase" for="state">State/County </label>--}}
-{{--                    <input class="form-control form-control-lg" type="text" id="state">--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-6">--}}
-{{--                    <button class="btn btn-link text-dark p-0 shadow-0" type="button" data-bs-toggle="collapse" data-bs-target="#alternateAddress">--}}
-{{--                        <div class="form-check">--}}
-{{--                            <input class="form-check-input" id="alternateAddressCheckbox" type="checkbox">--}}
-{{--                            <label class="form-check-label" for="alternateAddressCheckbox">Alternate billing address</label>--}}
-{{--                        </div>--}}
-{{--                    </button>--}}
-{{--                </div>--}}
-{{--                <div class="collapse" id="alternateAddress">--}}
-{{--                    <div class="row gy-3">--}}
-{{--                        <div class="col-12 mt-4">--}}
-{{--                            <h2 class="h4 text-uppercase mb-4">Alternative billing details</h2>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-lg-6">--}}
-{{--                            <label class="form-label text-sm text-uppercase" for="firstName2">First name </label>--}}
-{{--                            <input class="form-control form-control-lg" type="text" id="firstName2" placeholder="Enter your first name">--}}
-{{--                        </div>--}}
-{{--                        <div class="col-lg-6">--}}
-{{--                            <label class="form-label text-sm text-uppercase" for="lastName2">Last name </label>--}}
-{{--                            <input class="form-control form-control-lg" type="text" id="lastName2" placeholder="Enter your last name">--}}
-{{--                        </div>--}}
-{{--                        <div class="col-lg-6">--}}
-{{--                            <label class="form-label text-sm text-uppercase" for="email2">Email address </label>--}}
-{{--                            <input class="form-control form-control-lg" type="email" id="email2" placeholder="e.g. Jason@example.com">--}}
-{{--                        </div>--}}
-{{--                        <div class="col-lg-6">--}}
-{{--                            <label class="form-label text-sm text-uppercase" for="phone2">Phone number </label>--}}
-{{--                            <input class="form-control form-control-lg" type="tel" id="phone2" placeholder="e.g. +02 245354745">--}}
-{{--                        </div>--}}
-{{--                        <div class="col-lg-6">--}}
-{{--                            <label class="form-label text-sm text-uppercase" for="company2">Company name (optional) </label>--}}
-{{--                            <input class="form-control form-control-lg" type="text" id="company2" placeholder="Your company name">--}}
-{{--                        </div>--}}
-{{--                        <div class="col-lg-6 form-group">--}}
-{{--                            <label class="form-label text-sm text-uppercase" for="countryAlt">Country</label>--}}
-{{--                            <select class="country" id="countryAlt" data-customclass="form-control form-control-lg rounded-0">--}}
-{{--                                <option value>Choose your country</option>--}}
-{{--                            </select>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-lg-12">--}}
-{{--                            <label class="form-label text-sm text-uppercase" for="address2">Address line 1 </label>--}}
-{{--                            <input class="form-control form-control-lg" type="text" id="address2" placeholder="House number and street name">--}}
-{{--                        </div>--}}
-{{--                        <div class="col-lg-12">--}}
-{{--                            <label class="form-label text-sm text-uppercase" for="addressalt2">Address line 2 </label>--}}
-{{--                            <input class="form-control form-control-lg" type="text" id="addressalt2" placeholder="Apartment, Suite, Unit, etc (optional)">--}}
-{{--                        </div>--}}
-{{--                        <div class="col-lg-6">--}}
-{{--                            <label class="form-label text-sm text-uppercase" for="city2">Town/City </label>--}}
-{{--                            <input class="form-control form-control-lg" type="text" id="city2">--}}
-{{--                        </div>--}}
-{{--                        <div class="col-lg-6">--}}
-{{--                            <label class="form-label text-sm text-uppercase" for="state2">State/County </label>--}}
-{{--                            <input class="form-control form-control-lg" type="text" id="state2">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-12 form-group">--}}
-{{--                    <button class="btn btn-dark" type="submit">Place order</button>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </form>--}}
+        @if ($customer_address_id != 0 && $shipping_company_id != 0)
+        <h2 class="h5 text-uppercase mt-4 mb-4">Payment Methods</h2>
+            <div class="row">
+                @forelse($payment_methods as $payment_method)
+                    <div class="col-6 form-group">
+                        <div class="custom-control custom-radio">
+                            <input
+                                type="radio"
+                                id="payment-method-{{ $payment_method->id }}"
+                                class="custom-control-input"
+                                wire:model="payment_method_id"
+                                wire:click="updatePaymentMethod()"
+                                {{ intval($payment_method_id) == $payment_method->id ? 'checked' : '' }}
+                                value="{{ $payment_method->id }}">
+                            <label for="payment-method-{{ $payment_method->id }}" class="custom-control-label text-small">
+                                <b>{{ $payment_method->name }}</b>
+                            </label>
+                        </div>
+                    </div>
+                @empty
+                    <p>No payment way found</p>
+                @endforelse
+            </div>
+        @endif
+        @if ($customer_address_id != 0 && $shipping_company_id != 0 && $payment_method_id != 0)
+            @if (\Illuminate\Support\Str::lower($payment_method_code) == 'ppex')
+                <form action="{{ route('checkout.payment') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="customer_address_id" value="{{ old('customer_address_id', $customer_address_id) }}" class="form-control">
+                    <input type="hidden" name="shipping_company_id" value="{{ old('shipping_company_id', $shipping_company_id) }}" class="form-control">
+                    <input type="hidden" name="payment_method_id" value="{{ old('payment_method_id', $payment_method_id) }}" class="form-control">
+                    <button type="submit" name="submit" class="btn btn-dark btn-sm btn-block mt-2">
+                        Continue to checkout with PayPal
+                    </button>
+                </form>
+            @endif
+        @endif
     </div>
 
     <!-- ORDER SUMMARY-->

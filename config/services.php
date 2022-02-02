@@ -30,4 +30,15 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'paypal'=>[
+        'username' => 'sb-c8boq1315343_api1.business.example.com',
+        'password'=> 'HP3KQVTDWZPWSWTT',
+        'signature'=>'AbMQm7MSbjoSHgn17rofCTdTKLOPAcq8Wdo3wEc1rBESFV86XcCaFftF',
+        'sandbox'=>true,
+    ],
+
+    'stripe' =>[
+        'secret_key'=> 'sk_test_51KOOiqBRfPI8vyVfgkBv6JOsUeLh5KJee8cXLWJ8klXpdhBD1aUqEQw53OJ0OAPQIl7bRjSo3TWTt2cGCwxmIwQB00OfcAmM2W',
+    ],
+
 ];
