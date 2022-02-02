@@ -78,7 +78,6 @@
     <x-livewire-alert::scripts />
 
 
-
     <script src="{{asset('frontend/vendor/glightbox/js/glightbox.min.js')}}"></script>
     <script src="{{asset('frontend/vendor/nouislider/nouislider.min.js')}}"></script>
     <script src="{{asset('frontend/vendor/swiper/swiper-bundle.min.js')}}"></script>
@@ -113,6 +112,7 @@
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" ></script>
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
     @yield('script')
 </body>
 </html>

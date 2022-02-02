@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\SupervisorController;
 use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\CustomerController as FrontendCustomerController;
 use Illuminate\Support\Facades\Route;
 
 // Frontend Routes
@@ -28,7 +29,17 @@ Route::get('/wishlist'          ,     [   FrontendController::class , 'wishlist'
 
 Route::group(['middleware' => ['roles' , 'role:customer']] , function (){
 
-    Route::get('/checkout'                          ,    [FrontendController::class         , 'checkout'        ])->name('frontend.checkout');
+    Route::get('/dashboard'                     ,    [FrontendCustomerController::class         , 'dashboard'           ])->name('customer.dashboard');
+
+    Route::get('/profile'                       ,    [FrontendCustomerController::class         , 'profile'             ])->name('customer.profile');
+    Route::patch('/profile'                     ,    [FrontendCustomerController::class         , 'update_profile'      ])->name('customer.update_profile');
+    Route::get('profile/remove_profile_image'   ,    [FrontendCustomerController::class         , 'remove_profile_image'])->name('customer.remove_profile_image');
+
+    Route::get('/addresses'                     ,    [FrontendCustomerController::class         , 'addresses'           ])->name('customer.addresses');
+    Route::get('/orders'                        ,    [FrontendCustomerController::class         , 'orders'              ])->name('customer.orders');
+
+
+    Route::get('/checkout'                          ,    [PaymentController::class          , 'checkout'        ])->name('frontend.checkout');
     Route::post('/checkout/payment'                 ,    [PaymentController::class          , 'checkout_now'    ])->name('checkout.payment');
     Route::get('/checkout/{order_id}/cancelled'     ,    [PaymentController::class          , 'cancelled'       ])->name('checkout.cancel');
     Route::get('/checkout/{order_id}/completed'     ,    [PaymentController::class          , 'completed'       ])->name('checkout.complete');
